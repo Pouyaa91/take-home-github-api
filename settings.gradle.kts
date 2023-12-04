@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Take Home Github API"
 include(":app")
 include(":core:network")
+include(":core:model")
