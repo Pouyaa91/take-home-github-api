@@ -1,6 +1,5 @@
-package com.pouyaa.takehomegithubapi.core.data
+package com.pouyaa.takehomegithubapi.core.data.mapper
 
-import com.pouyaa.takehomegithubapi.core.data.mapper.NetworkRepoToRepoListMapper
 import com.pouyaa.takehomegithubapi.core.network.model.NetworkRepo
 import org.junit.Assert.assertEquals
 import org.junit.Test

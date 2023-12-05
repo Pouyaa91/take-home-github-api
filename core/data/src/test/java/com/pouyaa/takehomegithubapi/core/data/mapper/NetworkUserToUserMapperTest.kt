@@ -1,4 +1,4 @@
-package com.pouyaa.takehomegithubapi.core.data
+package com.pouyaa.takehomegithubapi.core.data.mapper
 
 import com.pouyaa.takehomegithubapi.core.data.mapper.NetworkUserToUserMapper
 import com.pouyaa.takehomegithubapi.core.network.model.NetworkUser
