@@ -16,6 +16,9 @@ kotlinSerializationJson = "1.6.0"
 retrofitKotlinSerializationJson = "1.0.0"
 okhttp = "4.11.0"
 mockk = "1.13.5"
+coil = "2.4.0"
+hiltNavigationCompose = "1.1.0"
+androidxNavigation = "2.7.5"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -42,6 +45,12 @@ kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-s
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinSerializationJson" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime-ktx" }
+lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime-ktx" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
