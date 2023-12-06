@@ -21,10 +21,10 @@ class HomeViewModel @Inject constructor(
     private val getUserReposListUseCase: GetUserReposListUseCase
 ) : ViewModel() {
 
-    var userUiState by mutableStateOf<UserUiState>(UserUiState.Init)
+    var userUiState by mutableStateOf<UserUiState>(UserUiState.Waiting)
         private set
 
-    var reposUiState by mutableStateOf<ReposUiState>(ReposUiState.Init)
+    var reposUiState by mutableStateOf<ReposUiState>(ReposUiState.Waiting)
         private set
 
     fun onSearchCLicked(userId: String) {
@@ -53,23 +53,29 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getUserReposListUseCase.fetch(userId).collectLatest { result ->
                 reposUiState = when (result) {
-                    is Result.Success -> ReposUiState.Success(repos = result.data)
+                    is Result.Success -> {
+                        if (result.data.isEmpty()) {
+                            ReposUiState.Empty
+                        } else {
+                            ReposUiState.Success(repos = result.data)
+                        }
+                    }
                     is Result.Error -> ReposUiState.Error(message = result.throwable?.message)
                 }
-
             }
         }
     }
 
     sealed class UserUiState {
-        data object Init : UserUiState()
+        data object Waiting : UserUiState()
         data object Loading : UserUiState()
         data class Success(val user: User) : UserUiState()
         data class Error(val message: String?) : UserUiState()
     }
 
     sealed class ReposUiState {
-        data object Init : ReposUiState()
+        data object Waiting : ReposUiState()
+        data object Empty: ReposUiState()
         data class Success(val repos: List<Repo>) : ReposUiState()
         data class Error(val message: String?) : ReposUiState()
     }
