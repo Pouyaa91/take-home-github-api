@@ -11,7 +11,10 @@ class NetworkRepoToRepoListMapper @Inject constructor() {
                 id = networkRepo.id ?: -1,
                 name = networkRepo.name.orEmpty(),
                 description = networkRepo.description.orEmpty(),
-                updatedAt = networkRepo.updatedAt.orEmpty(),
+                updatedAt = networkRepo.updatedAt
+                    ?.replace(Regex("[a-zA-Z]"), " ")
+                    ?.trimEnd()
+                    .orEmpty(),
                 starsCount = networkRepo.starsCount ?: 0,
                 forksCount = networkRepo.forksCount ?: 0
             )
