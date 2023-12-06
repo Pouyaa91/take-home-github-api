@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.pouyaa.takehomegithubapi.feature.details.navigation.detailsScreen
+import com.pouyaa.takehomegithubapi.feature.details.navigation.navigateToDetailsScreen
 import com.pouyaa.takehomegithubapi.feature.home.navigation.homeScreen
 
 @Composable
@@ -17,6 +19,7 @@ fun TakeHomeNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        homeScreen { }
+        homeScreen(navController::navigateToDetailsScreen)
+        detailsScreen()
     }
 }

@@ -17,7 +17,7 @@ class NetworkRepoToRepoListMapperTest {
                     id = 0,
                     name = "test name",
                     description = "test description",
-                    updatedAt = "2023",
+                    updatedAt = "2023-12-06T21:18:23Z",
                     starsCount = 10,
                     forksCount = 2
                 )
@@ -32,7 +32,7 @@ class NetworkRepoToRepoListMapperTest {
         assertEquals(mappedRepo?.id, networkRepo?.id)
         assertEquals(mappedRepo?.name, networkRepo?.name)
         assertEquals(mappedRepo?.description, networkRepo?.description)
-        assertEquals(mappedRepo?.updatedAt, networkRepo?.updatedAt)
+        assertEquals(mappedRepo?.updatedAt, "2023-12-06 21:18:23")
         assertEquals(mappedRepo?.starsCount, networkRepo?.starsCount)
         assertEquals(mappedRepo?.forksCount, networkRepo?.forksCount)
     }
