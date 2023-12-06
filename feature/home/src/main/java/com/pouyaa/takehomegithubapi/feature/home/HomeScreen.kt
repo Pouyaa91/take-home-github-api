@@ -1,8 +1,10 @@
 package com.pouyaa.takehomegithubapi.feature.home
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -122,7 +124,15 @@ private fun SearchToolbar(modifier: Modifier = Modifier, onSearchClicked: (Strin
 @Composable
 fun UserInfoView(modifier: Modifier = Modifier, uiState: HomeViewModel.UserUiState) {
     AnimatedContent(
-        targetState = uiState, label = "info", transitionSpec = { fadeIn() togetherWith fadeOut() }
+        targetState = uiState,
+        label = "info",
+        transitionSpec = {
+            fadeIn(tween(durationMillis = 300, delayMillis = 300)) +
+                    slideInVertically(
+                        animationSpec = tween(durationMillis = 600),
+                        initialOffsetY = { fullHeight -> fullHeight }
+                    ) togetherWith fadeOut(tween(0))
+        }
     ) { state ->
         when (state) {
             is HomeViewModel.UserUiState.Success -> UserInfoView(modifier, state.user)
@@ -155,7 +165,14 @@ fun ReposListView(
     onRepoClicked: (Repo) -> Unit
 ) {
     AnimatedContent(
-        targetState = uiState, label = "repos", transitionSpec = { fadeIn() togetherWith fadeOut() }
+        targetState = uiState,
+        label = "repos",
+        transitionSpec = {
+            fadeIn(tween(durationMillis = 300, delayMillis = 300)) + slideInVertically(
+                animationSpec = tween(durationMillis = 600),
+                initialOffsetY = { fullHeight -> fullHeight }
+            ) togetherWith fadeOut(tween(delayMillis = 0))
+        }
     ) { state ->
         when (state) {
             is HomeViewModel.ReposUiState.Error -> Text(text = state.message.orEmpty())
