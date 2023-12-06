@@ -71,4 +71,7 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(project(":feature:home"))
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
 }
