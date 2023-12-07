@@ -11,9 +11,11 @@ import io.mockk.coVerifySequence
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import retrofit2.Response
 
 class UserReposListRepositoryTest {
 
@@ -23,12 +25,16 @@ class UserReposListRepositoryTest {
     @MockK
     lateinit var apiService: UserReposApiService
 
+    @MockK
+    lateinit var json: Json
+
     private lateinit var repository: UserReposListRepositoryImpl
 
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        repository = UserReposListRepositoryImpl(apiService = apiService, mapper = mapper)
+        repository =
+            UserReposListRepositoryImpl(apiService = apiService, mapper = mapper, json = json)
     }
 
     @Test
@@ -45,7 +51,7 @@ class UserReposListRepositoryTest {
                 )
             )
 
-        coEvery { apiService.fetchUserRepos(any()) } returns emptyList()
+        coEvery { apiService.fetchUserRepos(any()) } returns Response.success(emptyList())
 
         coEvery { mapper.map(any()) } returns mappedResult
 

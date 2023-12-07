@@ -12,9 +12,11 @@ import io.mockk.coVerifySequence
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import retrofit2.Response
 
 class UserRepositoryTest {
 
@@ -24,12 +26,15 @@ class UserRepositoryTest {
     @MockK
     lateinit var apiService: UserApiService
 
+    @MockK
+    lateinit var json: Json
+
     private lateinit var repository: UserRepositoryImpl
 
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        repository = UserRepositoryImpl(apiService = apiService, mapper = mapper)
+        repository = UserRepositoryImpl(apiService = apiService, mapper = mapper, json = json)
     }
 
     @Test
@@ -37,7 +42,7 @@ class UserRepositoryTest {
         val mappedResult = User(userId = "id", name = "name", avatarUrl = "image url")
 
         coEvery { apiService.fetchUser(any()) } returns
-                NetworkUser(userId = null, name = null, avatarUrl = null)
+                Response.success(NetworkUser(userId = null, name = null, avatarUrl = null))
 
         coEvery { mapper.map(any()) } returns mappedResult
 

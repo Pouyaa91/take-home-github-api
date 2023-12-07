@@ -32,6 +32,8 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:model"))
     implementation(libs.core.ktx)
+    implementation(libs.kotlin.serialization.json)
+    implementation(libs.retrofit)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutines.test)

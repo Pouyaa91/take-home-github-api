@@ -1,6 +1,7 @@
 package com.pouyaa.takehomegithubapi.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.pouyaa.takehomegithubapi.core.network.model.NetworkMessage
 import com.pouyaa.takehomegithubapi.core.network.service.UserApiService
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
@@ -39,11 +40,23 @@ class UserApiServiceTest {
         val mockResponse = File("src/test/resources/user.json").readText()
 
         mockWebServer.enqueue(MockResponse().setBody(mockResponse))
-        val user = apiService.fetchUser("")
+        val user = apiService.fetchUser("").body()
 
-        assertEquals(user.name, "user name")
-        assertEquals(user.avatarUrl, "avatar url")
-        assertEquals(user.userId, "user id")
+        assertEquals(user?.name, "user name")
+        assertEquals(user?.avatarUrl, "avatar url")
+        assertEquals(user?.userId, "user id")
+    }
+
+    @Test
+    fun checkErrorConvertsCorrectly() = runTest {
+        val mockResponse = File("src/test/resources/error_response.json").readText()
+
+        mockWebServer.enqueue(MockResponse().setBody(mockResponse).setResponseCode(404))
+        val response = apiService.fetchUser("")
+        val networkMessage =
+            json.decodeFromString<NetworkMessage>(response.errorBody()?.string().orEmpty())
+        assertEquals(networkMessage.message, "Not Found")
+        assertEquals(response.code(), 404)
     }
 
     @After

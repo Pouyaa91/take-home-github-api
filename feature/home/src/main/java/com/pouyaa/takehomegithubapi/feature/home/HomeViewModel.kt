@@ -38,7 +38,9 @@ class HomeViewModel @Inject constructor(
                 when (result) {
                     is Result.Success -> onReceivedUser(result.data)
                     is Result.Error -> userUiState =
-                        UserUiState.Error(message = result.throwable?.message)
+                        UserUiState.Error(
+                            message = result.throwable?.message ?: result.message.orEmpty()
+                        )
                 }
             }
         }
@@ -60,7 +62,10 @@ class HomeViewModel @Inject constructor(
                             ReposUiState.Success(repos = result.data)
                         }
                     }
-                    is Result.Error -> ReposUiState.Error(message = result.throwable?.message)
+
+                    is Result.Error -> ReposUiState.Error(
+                        message = result.throwable?.message ?: result.message.orEmpty()
+                    )
                 }
             }
         }
@@ -75,7 +80,7 @@ class HomeViewModel @Inject constructor(
 
     sealed class ReposUiState {
         data object Waiting : ReposUiState()
-        data object Empty: ReposUiState()
+        data object Empty : ReposUiState()
         data class Success(val repos: List<Repo>) : ReposUiState()
         data class Error(val message: String?) : ReposUiState()
     }

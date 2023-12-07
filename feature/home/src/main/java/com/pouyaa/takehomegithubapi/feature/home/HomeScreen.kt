@@ -137,7 +137,12 @@ fun UserInfoView(modifier: Modifier = Modifier, uiState: HomeViewModel.UserUiSta
         when (state) {
             is HomeViewModel.UserUiState.Success -> UserInfoView(modifier, state.user)
             HomeViewModel.UserUiState.Loading -> CircularProgressIndicator()
-            is HomeViewModel.UserUiState.Error -> Text(text = state.message.orEmpty())
+            is HomeViewModel.UserUiState.Error -> Text(
+                modifier = modifier.padding(horizontal = 16.dp),
+                text = state.message.orEmpty(),
+                fontWeight = FontWeight.Bold
+            )
+
             HomeViewModel.UserUiState.Waiting -> {}
         }
     }
@@ -175,7 +180,12 @@ fun ReposListView(
         }
     ) { state ->
         when (state) {
-            is HomeViewModel.ReposUiState.Error -> Text(text = state.message.orEmpty())
+            is HomeViewModel.ReposUiState.Error -> Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.message.orEmpty(),
+                fontWeight = FontWeight.Bold
+            )
+
             HomeViewModel.ReposUiState.Waiting -> {}
             is HomeViewModel.ReposUiState.Success -> ReposList(modifier, state.repos, onRepoClicked)
             HomeViewModel.ReposUiState.Empty -> Text(text = stringResource(id = R.string.empty_repo))
