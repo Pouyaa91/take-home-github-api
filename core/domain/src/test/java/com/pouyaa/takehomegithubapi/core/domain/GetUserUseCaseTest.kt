@@ -46,7 +46,12 @@ class GetUserUseCaseTest {
 
     @Test
     fun checkUseCaseReturnCorrectlyOnError() = runTest {
-        coEvery { repository.fetch(any()) } returns flowOf(Result.Error(throwable = Exception("test exception")))
+        coEvery { repository.fetch(any()) } returns flowOf(
+            Result.Error(
+                throwable = Exception("test exception"),
+                message = null
+            )
+        )
 
         useCase.fetch("").collectLatest { result ->
             val message = (result as? Result.Error)?.throwable?.message
