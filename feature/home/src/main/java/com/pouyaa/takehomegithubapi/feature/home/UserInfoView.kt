@@ -15,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -22,6 +24,7 @@ import com.pouyaa.takehomegithubapi.core.model.User
 
 @Composable
 internal fun UserInfoView(modifier: Modifier = Modifier, uiState: HomeViewModel.UserUiState) {
+    val loading = stringResource(id = R.string.loading)
     AnimatedContent(
         targetState = uiState,
         label = "info",
@@ -35,7 +38,10 @@ internal fun UserInfoView(modifier: Modifier = Modifier, uiState: HomeViewModel.
     ) { state ->
         when (state) {
             is HomeViewModel.UserUiState.Success -> UserInfo(modifier, state.user)
-            HomeViewModel.UserUiState.Loading -> CircularProgressIndicator()
+
+            HomeViewModel.UserUiState.Loading -> CircularProgressIndicator(
+                modifier = Modifier.semantics { contentDescription = loading })
+
             is HomeViewModel.UserUiState.Error -> Text(
                 modifier = modifier.padding(horizontal = 16.dp),
                 text = state.message.orEmpty(),
