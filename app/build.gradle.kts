@@ -73,6 +73,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(project(":feature:home"))
     implementation(project(":feature:details"))
+    implementation(project(":core:model"))
     implementation(libs.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
 }
