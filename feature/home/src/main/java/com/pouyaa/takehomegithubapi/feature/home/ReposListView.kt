@@ -19,8 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pouyaa.takehomegithubapi.core.model.Repo
 
@@ -57,7 +59,7 @@ internal fun ReposListView(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun ReposList(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     repos: List<Repo>,
     onRepoClicked: (Repo) -> Unit
 ) {
@@ -87,7 +89,8 @@ private fun ReposList(
                     ),
                     text = repo.name,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray
                 )
                 Text(
                     modifier = Modifier.padding(
@@ -96,9 +99,32 @@ private fun ReposList(
                         end = 16.dp
                     ),
                     text = repo.description,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Gray
                 )
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ReposListPreview() {
+    ReposList(repos = listOf(
+        Repo(
+            id = 0,
+            name = "First Repo",
+            description = "First repo description",
+            updatedAt = "2023",
+            starsCount = 0,
+            forksCount = 0
+        ), Repo(
+            id = 1,
+            name = "Second Repo",
+            description = "Second repo description",
+            updatedAt = "2023",
+            starsCount = 0,
+            forksCount = 0
+        )
+    ), onRepoClicked = {})
 }

@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -46,7 +47,8 @@ internal fun SearchToolbar(modifier: Modifier = Modifier, onSearchClicked: (Stri
                 focusedContainerColor = MaterialTheme.colorScheme.background,
                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                 focusedLabelColor = Color.Magenta,
-                focusedIndicatorColor = Color.Magenta
+                focusedIndicatorColor = Color.Magenta,
+                cursorColor = Color.Magenta
             ),
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -67,4 +69,10 @@ internal fun SearchToolbar(modifier: Modifier = Modifier, onSearchClicked: (Stri
             Text(text = stringResource(id = R.string.search_all_caps))
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SearchToolbarPreview() {
+    SearchToolbar(onSearchClicked = {})
 }
