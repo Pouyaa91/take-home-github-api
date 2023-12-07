@@ -3,9 +3,6 @@
 
 This Android app communicates with the public GitHub API to display information about a specific user and their public repositories.
 
-## Modularization
-![Untitled Diagram](https://github.com/Pouyaa91/take-home-github-api/assets/84663287/b7423058-3b15-4e5a-a767-bf895c3f6aec)
-
 ## Technologies
 - Jetpack Compose
 - Navigation
@@ -18,6 +15,9 @@ This Android app communicates with the public GitHub API to display information 
 - Unit Tests
 - UI Tests
 - GitHub Actions
+
+## Modularization
+<img src="https://github.com/Pouyaa91/take-home-github-api/assets/84663287/b7423058-3b15-4e5a-a767-bf895c3f6aec" width="50%">
 
 ## Screenshots
 
