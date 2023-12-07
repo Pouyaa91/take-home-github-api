@@ -17,7 +17,7 @@ This Android app communicates with the public GitHub API to display information 
 - GitHub Actions
 
 ## Modularization
-<img src="https://github.com/Pouyaa91/take-home-github-api/assets/84663287/b7423058-3b15-4e5a-a767-bf895c3f6aec" width="50%">
+<img src="https://github.com/Pouyaa91/take-home-github-api/assets/84663287/b7423058-3b15-4e5a-a767-bf895c3f6aec" width="80%">
 
 ## Screenshots
 
