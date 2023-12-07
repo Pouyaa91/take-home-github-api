@@ -22,14 +22,16 @@ fun DetailsRoute(
     description: String,
     updatedAt: String,
     starsCount: Int,
-    forksCount: Int
+    forksCount: Int,
+    totalForks: Int
 ) {
     DetailsScreen(
         name = name,
         description = description,
         updatedAt = updatedAt,
         starsCount = starsCount,
-        forksCount = forksCount
+        forksCount = forksCount,
+        totalForks = totalForks
     )
 }
 
@@ -40,6 +42,7 @@ fun DetailsScreen(
     updatedAt: String,
     starsCount: Int,
     forksCount: Int,
+    totalForks: Int,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -66,6 +69,8 @@ fun DetailsScreen(
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Start
         )
+
+        TotalUserForks(totalForks)
     }
 }
 
@@ -73,10 +78,11 @@ fun DetailsScreen(
 @Composable
 fun DetailsPreview(@PreviewParameter(LoremIpsum::class) sampleText: String) {
     DetailsRoute(
-        sampleText,
-        sampleText,
-        "2023-12-06 21:18:23",
-        11938,
-        140283
+        name = sampleText,
+        description = "sampleText",
+        updatedAt = "2023-12-06 21:18:23",
+        starsCount = 11938,
+        forksCount = 140283,
+        totalForks = 500
     )
 }

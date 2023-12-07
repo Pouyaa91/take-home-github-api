@@ -8,18 +8,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pouyaa.takehomegithubapi.core.model.Repo
+import com.pouyaa.takehomegithubapi.feature.home.navigation.TotalForks
 
 @Composable
 internal fun HomeRoute(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    onRepoClicked: (Repo) -> Unit
+    onRepoClicked: (Repo, TotalForks) -> Unit
 ) {
     HomeScreen(
         modifier = modifier,
         userUiState = viewModel.userUiState,
         reposUiState = viewModel.reposUiState,
-        onRepoClicked = onRepoClicked,
+        onRepoClicked = { repo ->
+            onRepoClicked(repo, viewModel.getTotalForksForUser())
+        },
         onSearchClicked = viewModel::onSearchCLicked
     )
 }

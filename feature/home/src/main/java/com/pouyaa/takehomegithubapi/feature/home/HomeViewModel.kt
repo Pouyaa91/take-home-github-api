@@ -28,6 +28,8 @@ class HomeViewModel @Inject constructor(
         private set
 
     fun onSearchCLicked(userId: String) {
+        userUiState = UserUiState.Loading
+        reposUiState = ReposUiState.Waiting
         fetchUser(userId)
     }
 
@@ -69,6 +71,10 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun getTotalForksForUser(): Int {
+        return (reposUiState as? ReposUiState.Success)?.repos?.sumOf { it.forksCount } ?: 0
     }
 
     sealed class UserUiState {
