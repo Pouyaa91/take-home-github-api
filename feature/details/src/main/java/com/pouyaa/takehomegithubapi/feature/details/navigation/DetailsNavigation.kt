@@ -20,7 +20,14 @@ private const val DETAILS_ARGS =
 private const val DETAILS_NAVIGATION_ROUTE = DETAILS_ROUTE + DETAILS_ARGS
 
 fun NavController.navigateToDetailsScreen(repo: Repo) {
-    navigate("$DETAILS_ROUTE/${repo.name}/${repo.description}/${repo.updatedAt}/${repo.starsCount}/${repo.forksCount}")
+    navigate(
+        "$DETAILS_ROUTE/" +
+                "${repo.name.takeIf(String::isNotBlank)}/" +
+                "${repo.description.takeIf(String::isNotBlank)}/" +
+                "${repo.updatedAt.takeIf(String::isNotBlank)}/" +
+                "${repo.starsCount}/" +
+                "${repo.forksCount}"
+    )
 }
 
 fun NavGraphBuilder.detailsScreen() {
@@ -28,9 +35,18 @@ fun NavGraphBuilder.detailsScreen() {
     composable(
         route = DETAILS_NAVIGATION_ROUTE,
         arguments = listOf(
-            navArgument(REPO_NAME) { type = NavType.StringType },
-            navArgument(REPO_DESCRIPTION) { type = NavType.StringType },
-            navArgument(REPO_UPDATED_AT) { type = NavType.StringType },
+            navArgument(REPO_NAME) {
+                nullable = true
+                type = NavType.StringType
+            },
+            navArgument(REPO_DESCRIPTION) {
+                nullable = true
+                type = NavType.StringType
+            },
+            navArgument(REPO_UPDATED_AT) {
+                nullable = true
+                type = NavType.StringType
+            },
             navArgument(REPO_STARS_COUNT) { type = NavType.IntType },
             navArgument(REPO_FORKS_COUNT) { type = NavType.IntType }
         )
